@@ -1,0 +1,101 @@
+{% extends "home.html" %}
+{% block title %}
+<title>User Activation </title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to right, #74ebd5, #acb6e5);
+    }
+    .table-container {
+        width: 80%;
+        margin-left: 150px;
+        margin-top: 40px;
+        overflow-x: auto; /* Horizontal scroll */
+    }
+    table {
+        width: 100%; /* Full width */
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+    td {
+        color: rgb(20, 20, 20);
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .add-stock-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+    .add-stock-button:hover {
+        background-color: #45a049;
+    }
+    h1 {
+        color: rgb(20, 20, 20);
+        margin-top: 30px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+<h1>View All Data</h1> 
+{% if messages %}
+{% for message in messages %}
+    <div class="alert alert-success">
+       <center> {{ message }}</center>
+    </div>
+{% endfor %}
+{% endif %}
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Uploader Email</th>
+                <th>Image Name 1</th>
+                <th>Image Name 2</th>
+                <th>Output</th>
+                {% comment %} <th>Action</th> {% endcomment %}
+                
+           
+            </tr>
+        </thead>
+        {% for i in data %}
+        <tbody>
+            <tr>
+                <td>{{ i.uploader }}</td>
+                <td>{{ i.image1 }}</td>
+                <td>{{ i.image2 }}</td>
+                <td>{{ i.output }}</td>
+               
+               
+                
+            </tr>
+{% empty %}
+<tr>
+    <td colspan="4"> No Data Found</td>
+</tr>
+
+
+    </tbody>
+    {% endfor %}
+
+    </table>
+</div>
+{% endblock %}
