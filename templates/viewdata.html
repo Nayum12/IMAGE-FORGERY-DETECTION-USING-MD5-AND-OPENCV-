@@ -1,101 +1,114 @@
 {% extends "home.html" %}
 {% block title %}
-<title>User Activation </title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(to right, #74ebd5, #acb6e5);
+    .data-wrapper {
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        min-height: 80vh;
+        padding: 40px 30px;
+    }
+    .data-wrapper h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 700;
     }
     .table-container {
-        width: 80%;
-        margin-left: 150px;
-        margin-top: 40px;
-        overflow-x: auto; /* Horizontal scroll */
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        overflow-x: auto;
+        padding: 20px;
+        max-width: 1000px;
+        margin: 0 auto;
     }
     table {
-        width: 100%; /* Full width */
+        width: 100%;
         border-collapse: collapse;
     }
     th, td {
-        border: 1px solid #dddddd;
+        border: 1px solid #e0e0e0;
         text-align: center;
-        padding: 8px;
-    }
-    td {
-        color: rgb(20, 20, 20);
+        padding: 12px 15px;
+        font-size: 14px;
     }
     th {
-        background-color: #f2f2f2;
+        background-color: #28b3a7;
+        color: #fff;
+        font-weight: 600;
     }
-    .add-stock-button {
-        background-color: #4CAF50;
-        border: none;
-        color: white;
-        padding: 15px 32px;
+    tr:nth-child(even) td {
+        background-color: #f7fffe;
+    }
+    tr:hover td {
+        background-color: #e8f8f7;
+    }
+    td {
+        color: #333;
+    }
+    .badge-same {
+        background: #28a745;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .badge-diff {
+        background: #dc3545;
+        color: #fff;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    .no-data {
         text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: 0.3s;
-    }
-    .add-stock-button:hover {
-        background-color: #45a049;
-    }
-    h1 {
-        color: rgb(20, 20, 20);
-        margin-top: 30px;
-        text-align: center;
+        color: #888;
+        font-style: italic;
+        padding: 20px;
     }
 </style>
-</head>
-<body>
-<h1>View All Data</h1> 
-{% if messages %}
-{% for message in messages %}
-    <div class="alert alert-success">
-       <center> {{ message }}</center>
+
+<div class="data-wrapper">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success text-center mb-3">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    <h1>My Detection Results</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Uploader Email</th>
+                    <th>Image 1</th>
+                    <th>Image 2</th>
+                    <th>Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ i.uploader }}</td>
+                    <td>{{ i.filename1 }}</td>
+                    <td>{{ i.filename2 }}</td>
+                    <td>
+                        {% if i.output == "Image is Same." %}
+                            <span class="badge-same">{{ i.output }}</span>
+                        {% else %}
+                            <span class="badge-diff">{{ i.output }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="no-data">No detection results found. <a href="{% url 'uploadfile' %}">Upload images to get started.</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-{% endfor %}
-{% endif %}
-<div class="table-container">
-    <table>
-        <thead>
-            <tr>
-                <th>Uploader Email</th>
-                <th>Image Name 1</th>
-                <th>Image Name 2</th>
-                <th>Output</th>
-                {% comment %} <th>Action</th> {% endcomment %}
-                
-           
-            </tr>
-        </thead>
-        {% for i in data %}
-        <tbody>
-            <tr>
-                <td>{{ i.uploader }}</td>
-                <td>{{ i.image1 }}</td>
-                <td>{{ i.image2 }}</td>
-                <td>{{ i.output }}</td>
-               
-               
-                
-            </tr>
-{% empty %}
-<tr>
-    <td colspan="4"> No Data Found</td>
-</tr>
-
-
-    </tbody>
-    {% endfor %}
-
-    </table>
 </div>
-{% endblock %}
+{% endblock title %}
