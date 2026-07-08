@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+{% block title %}
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="/static/img/i2.jpg" alt="" style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start text-primary pe-3">About</h6>
+                <h1 class="mb-4">Image Forgery Detection using OpenCV and MD5</h1>
+                <p class="mb-4">"Image forgery detection is a crucial technique for verifying the authenticity of digital images and preventing manipulation. Using OpenCV, image processing techniques such as edge detection, keypoint extraction (SIFT, ORB), and error level analysis (ELA) can be employed to identify tampering. OpenCV helps in detecting inconsistencies in textures, lighting, and cloned regions within an image. Additionally, MD5 (Message Digest Algorithm 5) plays a vital role in integrity verification by generating a unique hash value for an image. Any modification to the image results in a different MD5 hash, signaling possible tampering. By comparing MD5 hashes before and after image processing, it becomes possible to detect unauthorized changes effectively. The combination of OpenCV-based visual analysis and MD5 cryptographic hashing provides a robust framework for image forgery detection, ensuring digital image security and authenticity.</p>
+                
+                <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

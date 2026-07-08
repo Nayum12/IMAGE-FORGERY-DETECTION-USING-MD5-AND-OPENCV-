@@ -1,0 +1,6 @@
+# Image Forgery Detection — Python Dependencies
+# Install all dependencies with: pip install -r requirements.txt
+
+django>=5.0
+opencv-python
+md5hash
